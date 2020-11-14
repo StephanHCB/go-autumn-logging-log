@@ -27,7 +27,7 @@ Very minimal and not very versatile, but good for command line tools etc.
 
 ### Limitations
 
-* Not currently context aware (because plain golang standard library logging has no support for it)
+* Only partially context aware (because plain golang standard library logging has no support for it)
 * Does not provide a context injection middleware (same reason)
 * Not optimized for performance or throughput
 
@@ -35,6 +35,8 @@ Very minimal and not very versatile, but good for command line tools etc.
 
 * minimal dependency footprint (just the golang standard library)
 * supports additional fields and errors
+* supports log levels
+* supports logging requestIds, if `aulogging.RequestIdRetriever` has been assigned
 
 ## Usage
 

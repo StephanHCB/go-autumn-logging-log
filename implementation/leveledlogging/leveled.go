@@ -9,6 +9,7 @@ import (
 
 type PlainLeveledLoggingImplementation struct {
 	LogLevel string
+	RequestId string
 	AbortAfter bool
 	Err error
 	AdditionalFields map[string]string
@@ -42,9 +43,9 @@ func (lv *PlainLeveledLoggingImplementation) addFieldsAndErrOutput() []interface
 
 func (lv *PlainLeveledLoggingImplementation) Print(v ...interface{}) {
 	if lv.Err != nil || lv.AdditionalFields != nil {
-		log.Print(lv.LogLevel + " " + fmt.Sprint(v...) + " " + fmt.Sprint(lv.addFieldsAndErrOutput()...))
+		log.Print(lv.RequestId + lv.LogLevel + " " + fmt.Sprint(v...) + " " + fmt.Sprint(lv.addFieldsAndErrOutput()...))
 	} else {
-		log.Print(lv.LogLevel + " " + fmt.Sprint(v...))
+		log.Print(lv.RequestId + lv.LogLevel + " " + fmt.Sprint(v...))
 	}
 	if lv.AbortAfter {
 		os.Exit(1)
