@@ -14,13 +14,13 @@ func (l *PlainLoggingImplementation) Ctx(ctx context.Context) auloggingapi.Conte
 	if aulogging.RequestIdRetriever != nil {
 		requestId = "[" + aulogging.RequestIdRetriever(ctx) + "] "
 	}
-	return &contextawarelogging.PlainContextAwareLoggingImplementation{RequestId: requestId}
+	return &contextawarelogging.PlainContextAwareLoggingImplementation{RequestId: requestId, Ctx: ctx}
 }
 
 func (l *PlainLoggingImplementation) NoCtx() auloggingapi.ContextAwareLoggingImplementation {
 	requestId := ""
 	if aulogging.RequestIdRetriever != nil {
-		requestId = "[" + aulogging.RequestIdRetriever(context.TODO()) + "] "
+		requestId = "[" + aulogging.RequestIdRetriever(context.Background()) + "] "
 	}
-	return &contextawarelogging.PlainContextAwareLoggingImplementation{RequestId: requestId}
+	return &contextawarelogging.PlainContextAwareLoggingImplementation{RequestId: requestId, Ctx: context.Background()}
 }
